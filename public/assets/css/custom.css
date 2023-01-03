@@ -1,0 +1,69 @@
+@media screen and (max-width: 768px) {
+    .cs-spacing{
+        display: none !important;
+    }
+}
+.pending{
+    color: #f8d53a;
+}
+.verified{
+    color: #20bf00;
+}
+.none{
+    color: #a5a5a5;
+}
+.table-cs{
+    border-collapse:separate; 
+    border-spacing:1em;
+}
+.btn-blue{
+    color: white;
+    background-color: #4EB9FF;
+}
+.btn-blue:hover{
+    color: white;
+    background-color: #4EB9FF;
+}
+.bold{
+    font-weight: bold;
+}
+.blue-cs-color{
+    color: #1a86f1;
+}
+.blue-cs-bg{
+    background-color: #1a86f1;
+}
+.h1-cs{
+    font-size: 2.2rem;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    color: black !important;
+}
+.swal2-styled.swal2-confirm{
+    background-color: #1a86f1 !important;
+}
+.overlay {
+  /* Height & width depends on how you want to reveal the overlay (see JS below) */   
+  height: 100%;
+  width: 0;
+  position: fixed; /* Stay in place */
+  z-index: 9999; /* Sit on top */
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.418); /* Black w/opacity */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  /* transition: 0.5s; */
+}
+#loader .spinner-border{
+    width: 10rem !important;
+    height: 10rem !important;
+    position: relative;
+    top: 30%; /* 25% from the top */
+    left: 50%;
+    width: 100%; /* 100% width */
+}
+@media screen and (max-width: 768px) {
+.h1-cs{
+    font-size: 2.5rem;
+}
+}
