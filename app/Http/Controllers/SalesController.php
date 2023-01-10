@@ -22,8 +22,10 @@ class SalesController extends Controller
             ]);
             if($response['status']==='success'){
                 // return $response;
+                if($page > $response['data']['lastPage']){return abort(404,Messages::TABLE_ERROR);}
                 return view('sales.advisors',
                     ['page'=>$page,
+                    'lastPage'=>$response['data']['lastPage'],
                     'byPeriod'=>$response['data']['sales_by_period'],
                     'advisors'=>$response['data']['sales_per_advisor'],
                 ]);
@@ -49,8 +51,11 @@ class SalesController extends Controller
                 'items' => 5,
             ]);
             if($response['status']==='success'){
+                if($page > $response['data']['lastPage']){return abort(404,Messages::TABLE_ERROR);}
                 return view('sales.advisor',
                     ['page'=>$page,
+                    'advisorID'=>$advisorID,
+                    'lastPage'=>$response['data']['lastPage'],
                     'salesInfo'=>$response['data'],
                 ]);
             }else{
@@ -170,8 +175,10 @@ class SalesController extends Controller
                 'items' => 5,
             ]);
             if($response['status']==='success'){
+                if($page > $response['data']['last_page']){return abort(404,Messages::TABLE_ERROR);}
                 return view('sales.clients',
                     ['page'=>$page,
+                    'lastPage'=>$response['data']['last_page'],
                     'byPeriod'=>$response['data']['sales_by_period'],
                     'customers'=>$response['data']['sales_per_customer'],
                 ]);
@@ -182,7 +189,7 @@ class SalesController extends Controller
 
         }catch(Exception $e){
             // $req->session()->flush();
-            abort(500,Messages::REQUEST_ERROR);
+            abort(500,$e->getMessage());
         }
     }
     public function client($clientID,Request $req){
@@ -197,8 +204,11 @@ class SalesController extends Controller
                 'items' => 5,
             ]);
             if($response['status']==='success'){
+                if($page > $response['data']['lastPage']){return abort(404,Messages::TABLE_ERROR);}
                 return view('sales.client',
                     ['page'=>$page,
+                    'clientID'=>$clientID,
+                    'lastPage'=>$response['data']['lastPage'],
                     'info'=>$response['data'],
                 ]);
             }else{

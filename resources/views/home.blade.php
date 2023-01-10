@@ -94,7 +94,7 @@
                     <div class="col-6">
                         <span class="text-muted mb-3 lh-1 d-block text-truncate">Advisors Available</span>
                         <h4 class="mb-3">
-                            <span class="counter-value" data-target="12.57">0</span>%
+                            <span>{{$general['porc_advisors']}}</span>
                         </h4>
                     </div>
                     <div class="col-6">
@@ -181,9 +181,9 @@
                         </div>
                         <div class="row align-items-center">
                             <div class="col-sm">
-                                <div id="comparative-chart" data-colors='["#1B86F0"]' data-sales="[{{$comparative['total_sales']['actual_month']}},{{$comparative['total_sales']['last_month']}},50]"
-                                data-costs="[{{$comparative['direct_costs']['actual_month']}},{{$comparative['direct_costs']['last_month']}},90]"
-                                data-profit="[{{$comparative['gross_profit']['actual_month']}},{{$comparative['gross_profit']['last_month']}},70]"
+                                <div id="comparative-chart" data-colors='["#1B86F0"]' data-sales="[{{$comparative['total_sales']['actual_month']}},{{$comparative['total_sales']['last_month']}},{{$comparative['total_sales']['porcentaje']}}]"
+                                data-costs="[{{$comparative['direct_costs']['actual_month']}},{{$comparative['direct_costs']['last_month']}},{{$comparative['direct_costs']['porcentaje']}}]"
+                                data-profit="[{{$comparative['gross_profit']['actual_month']}},{{$comparative['gross_profit']['last_month']}},{{$comparative['gross_profit']['porcentaje']}}]"
                                 class="apex-charts"></div>
                             </div>
                             <div class="col-sm align-self-center">
@@ -219,7 +219,7 @@
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
                                     <div class="text-center p-4">
-                                        <h1 class="mt-3 lh-base text-white h1-cs"><b>{{$logged['porc_customers_loggedin']}}</b></h1>
+                                        <h1 class="mt-3 lh-base text-white h1-cs"><b>{{$logged['porc_customers_loggedin']}}%</b></h1>
                                         <p class="text-white font-size-13">Of costumers logged in this month</p>
                                         <button type="button" class="btn btn-blue btn-sm">View more</button>
                                     </div>
@@ -227,7 +227,7 @@
                                 <!-- end carousel-item -->
                                <div class="carousel-item">
                                     <div class="text-center p-4">
-                                        <h1 class="mt-3 lh-base text-white h1-cs"><b>{{$logged['porc_advisors_loggedin']}}</b></h1>
+                                        <h1 class="mt-3 lh-base text-white h1-cs"><b>{{$logged['porc_advisors_loggedin']}}%</b></h1>
                                         <p class="text-white font-size-13">Of advisors logged in this month</p>
                                         <button type="button" class="btn btn-blue btn-sm">View more</button>
                                     </div>
@@ -348,22 +348,22 @@
                 <div id="sales-by-locations" data-colors='["#1a86f1"]' style="height: 250px"></div>
 
                 <div class="px-2 py-2">
-                    <p class="mb-1">MEXICO <span class="float-end">55%</span></p>
+                    <p class="mb-1">MEXICO <span class="float-end">{{$countries['sales_by_country'][0]['porcentaje'] ?? 0}}%</span></p>
                     <div class="progress mt-2" style="height: 6px;">
                         <div class="progress-bar progress-bar-striped blue-cs-bg" role="progressbar"
-                            style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="55">
+                            style="width: {{$countries['sales_by_country'][0]['porcentaje'] ?? 0}}%" aria-valuenow="{{$countries['sales_by_country'][0]['porcentaje'] ?? 0}}" aria-valuemin="0" aria-valuemax="{{$countries['sales_by_country'][0]['porcentaje'] ?? 0}}">
                         </div>
                     </div>
-                    <p class="mb-1 mt-3">USA <span class="float-end">75%</span></p>
+                    <p class="mb-1 mt-3">USA <span class="float-end">{{$countries['sales_by_country'][1]['porcentaje']?? 0}}%</span></p>
                     <div class="progress mt-2" style="height: 6px;">
                         <div class="progress-bar progress-bar-striped blue-cs-bg" role="progressbar"
-                            style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="75">
+                            style="width: {{$countries['sales_by_country'][1]['porcentaje']?? 0}}%" aria-valuenow="{{$countries['sales_by_country'][1]['porcentaje'] ?? 0}}" aria-valuemin="0" aria-valuemax="{{$countries['sales_by_country'][1]['porcentaje'] ?? 0}}">
                         </div>
                     </div>
-                    <p class="mt-3 mb-1">CANADA <span class="float-end">41.2%</span></p>
+                    <p class="mt-3 mb-1">CANADA <span class="float-end">{{$countries['sales_by_country'][2]['porcentaje'] ?? 0}}%</span></p>
                     <div class="progress mt-2" style="height: 6px;">
-                        <div class="progress-bar progress-bar-striped blue-cs-bg" role="progressbar"
-                            style="width: 41.2%" aria-valuenow="41.2" aria-valuemin="0" aria-valuemax="41.2">
+                       <div class="progress-bar progress-bar-striped blue-cs-bg" role="progressbar"
+                            style="width: {{$countries['sales_by_country'][2]['porcentaje'] ?? 0}}%" aria-valuenow="{{$countries['sales_by_country'][2]['porcentaje'] ?? 0}}" aria-valuemin="0" aria-valuemax="{{$countries['sales_by_country'][2]['porcentaje'] ?? 0}}">
                         </div>
                     </div>
                 </div>

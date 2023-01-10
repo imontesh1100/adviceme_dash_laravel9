@@ -109,6 +109,21 @@
                     @endforeach
                     </tbody>
                 </table>
+                <div class="row float-end">
+                    <div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate">
+                        <ul class="pagination">
+                            <li class="paginate_button page-item previous @if($page<=1) disabled @endif" id="datatable-buttons_previous">
+                                <a href="{{route('sales.advisor',['advisorID'=>$advisorID,'page'=>$page-1])}}" aria-controls="datatable-buttons" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                            </li>
+                            <li class="paginate_button page-item active">
+                                <a href="#" aria-controls="datatable-buttons" data-dt-idx="1" tabindex="0" class="page-link">{{$page}}</a>
+                            </li>
+                            <li class="paginate_button page-item next @if($page==$lastPage) disabled @endif" id="datatable-buttons_next">
+                                <a href="{{route('sales.advisor',['advisorID'=>$advisorID,'page'=>$page+1])}}" aria-controls="datatable-buttons" data-dt-idx="2" tabindex="0" class="page-link">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

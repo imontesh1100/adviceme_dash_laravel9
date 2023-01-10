@@ -30,7 +30,7 @@ class HomeController extends Controller
                 $responses['sales']['status']==='success' && 
                 $responses['countries']['status']==='success' && 
                 $responses['comparative']['status']==='success'){
-                // return $responses['countries'];
+                // return $responses['countries']['data'];
                 return view('home',
                     ['target_period'=>$target_period,
                     'general'=>$responses['stats']['data'],
