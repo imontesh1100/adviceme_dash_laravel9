@@ -27,17 +27,17 @@
     <div class="col-xl-9 col-lg-8">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Miguel Martinez Lopez</h5>
+                <h5 class="card-title mb-0">{{$data['infoGralAdvisor']['full_name']}}</h5>
             </div>
             <div class="card-body">
                 <div>
                     <div class="row justify-content-center">
                         <div class="col-12">
-                            <p class="font-size-15">Health: Medicine, Cardiology</p>
-                            <p class="font-size-15">Number Code       **********</p>
-                            <p class="font-size-15">Institution       **********</p>
-                            <p class="font-size-15">Expedition date   **********</p>
-                            <p class="font-size-15">Phone number      **********</p>
+                            <p class="font-size-15">{{$data['infoGralAdvisor']['name_category']}}:{{$data['infoGralAdvisor']['name_career']}} , {{$data['infoGralAdvisor']['name_expertise']}}</p>
+                            <p class="font-size-15">Number Code       {{$data['infoGralAdvisor']['number_code'] ?? 'N/A'}}</p>
+                            <p class="font-size-15">Institution       {{$data['infoGralAdvisor']['institution'] ?? 'N/A'}}</p>
+                            <p class="font-size-15">Expedition date   {{$data['infoGralAdvisor']['expedition_date'] ?? 'N/A'}}</p>
+                            <p class="font-size-15">Phone number      {{$data['infoGralAdvisor']['phone_number'] ?? 'N/A'}}</p>
                         </div>
                         <!-- end col -->
                     </div>
@@ -52,7 +52,10 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title mb-3">Positive verification</h5>
-                <a href="/advisors/users/visible" class="btn btn-success waves-effect waves-light">Accept</a>
+                <form id="stage2PositiveForm" method="post" action="{{route('advisors.stage2.positive')}}">
+                    <input type="hidden" name="advisorID" value="{{$data['infoGralAdvisor']['id_user_advisor']}}">
+                    <button type="submit" class="btn btn-success waves-effect waves-light">Accept</button>
+                </form>
             </div>
             <!-- end card body -->
         </div>
@@ -63,22 +66,16 @@
                 <h5 class="card-title mb-3">Still pending</h5>
                 <div>
                     <ul class="list-unstyled mb-0">
+                        @foreach($data['stillPendingOptions'] as $opc)
                         <li>
                             <div class="form-check mb-3">
-                                <input class="form-check-input" type="radio" name="formRadios1" id="formRadios1">
-                                <label class="form-check-label" for="formRadios1">
-                                    Category does not match
+                                <input class="form-check-input" type="radio" name="pendingOption" id="stillPending{{$opc['id_update_profile_request']}}" value="{{$opc['id_update_profile_request']}}" required>
+                                <label class="form-check-label" for="stillPending{{$opc['id_update_profile_request']}}">
+                                    {{$opc['update_request_profile_name']}}
                                 </label>
                             </div>
                         </li>
-                        <li>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="radio" name="formRadios2" id="formRadios2">
-                                <label class="form-check-label" for="formRadios2">
-                                    Profession does not check
-                                </label>
-                            </div>
-                        </li>
+                        @endforeach
                         <li>
                             <a href="#" class="btn btn-soft-primary waves-effect waves-light">SEND</a>
                         </li>
@@ -93,23 +90,16 @@
                 <h5 class="card-title mb-3">Disable user</h5>
                 <div>
                     <ul class="list-unstyled mb-0">
+                        @foreach($data['disableOptions'] as $opc)
                         <li>
                             <div class="form-check mb-3">
-                                <input class="form-check-input" type="radio" name="formRadios3" id="formRadios3">
-                                <label class="form-check-label" for="formRadios3">
-                                   Profession number does not exists
+                                <input class="form-check-input" type="radio" name="disableOption" id="disableOption{{$opc['id_disable_reason']}}" required>
+                                <label class="form-check-label" for="disableOption{{$opc['id_disable_reason']}}">
+                                    {{$opc['disable_reason_name']}}
                                 </label>
                             </div>
                         </li>
-                        <li>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="radio" name="formRadios4" id="formRadios4">
-                                <label class="form-check-label" for="formRadios4">
-                                    Does not appear on national system
-                                </label>
-                            </div>
-                        </li>
-                        
+                        @endforeach
                         <li>
                             <a href="#" class="btn btn-danger waves-effect waves-light">Disable</a>
                         </li>
@@ -126,5 +116,6 @@
 <!-- end row -->
 @endsection
 @push('scripts')
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{asset('custom/js/advisorsStage2.js')}}"></script>
 @endpush

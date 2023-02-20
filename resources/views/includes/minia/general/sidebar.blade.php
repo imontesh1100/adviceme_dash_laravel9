@@ -42,11 +42,6 @@
                     </a>
                      <ul class="sub-menu" aria-expanded="false">
                         <li>
-                            <a href="/advisors/users/visible">
-                                <span data-key="t-calendar">Visible</span>
-                            </a>
-                        </li>
-                        <li>
                             <a href="/advisors/users/no-visible">
                                 <span data-key="t-calendar">No visible</span>
                             </a>
@@ -54,6 +49,11 @@
                         <li>
                             <a href="/advisors/users/pending-visible">
                                 <span data-key="t-calendar">Pending visible</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/advisors/users/visible">
+                                <span data-key="t-calendar">Visible</span>
                             </a>
                         </li>
                         <li>

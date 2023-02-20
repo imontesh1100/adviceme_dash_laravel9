@@ -33,17 +33,21 @@
                         <div class="d-flex align-items-start mt-3 mt-sm-0">
                             <div class="flex-shrink-0">
                                 <div class="avatar-xl me-3">
-                                    <img src="/assets/images/users/avatar-2.jpg" alt="" class="img-fluid rounded-circle d-block">
+                                    @if(count($profile['gallery'])>0)
+                                    <img src="{{$profile['gallery'][0]}}" alt="" class="img-fluid rounded-circle d-block">
+                                    @else
+                                    <img src="/assets/images/users/profile.png" alt="" class="img-fluid rounded-circle d-block">
+                                    @endif
                                 </div>
                             </div>
                             <div class="flex-grow-1">
                                 <div>
-                                    <h5 class="font-size-16 mb-1">Phyllis Gatlin</h5>
-                                    <p class="text-muted font-size-13">Date birth: March 15, 1990</p>
+                                    <h5 class="font-size-16 mb-1">{{$profile['generals']['full_name']}}</h5>
+                                    <p class="text-muted font-size-13">Date birth: {{$profile['generals']['date_birth']}}</p>
 
                                     <div class="d-flex flex-wrap align-items-start gap-2 gap-lg-3 text-muted font-size-13">
-                                        <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>Mexico</div>
-                                        <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>phyllisgatlin@minia.com</div>
+                                        <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>{{$profile['generals']['country']}}</div>
+                                        <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>{{$profile['generals']['email']}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +107,7 @@
                                     </div>
                                     <div class="col-xl">
                                         <div class="text-muted">
-                                            <p class="mb-2">UTC-6</p>
+                                            <p class="mb-2">{{$profile['overview']['timezone']}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +121,7 @@
                                     </div>
                                     <div class="col-xl">
                                         <div class="text-muted">
-                                            <p>Health</p>
+                                            <p>{{$profile['overview']['category']}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -131,7 +135,7 @@
                                     </div>
                                     <div class="col-xl">
                                         <div class="text-muted">
-                                            <p class="mb-2">Nutriologyst</p>
+                                            <p class="mb-2">{{$profile['overview']['career']}} , {{$profile['overview']['expertise']}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -145,7 +149,7 @@
                                     </div>
                                     <div class="col-xl">
                                         <div class="text-muted">
-                                            <p class="mb-2">CDMX</p>
+                                            <p class="mb-2">{{$profile['overview']['work_address']}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +163,7 @@
                                     </div>
                                     <div class="col-xl">
                                         <div class="text-muted">
-                                            <p class="mb-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae vel, placeat distinctio ex perferendis, pariatur alias vitae nemo deserunt magni, vero itaque magnam labore eos asperiores consequuntur velit expedita id.</p>
+                                            <p class="mb-2">{{$profile['overview']['description']}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -173,9 +177,9 @@
                                     </div>
                                     <div class="col-xl">
                                         <div class="text-muted">
-                                            <p class="mb-2">* Spanish</p>
-                                            <p class="mb-2">* English</p>
-                                            <p class="mb-2">* French</p>
+                                            @foreach($profile['overview']['languages'] as $lang)
+                                            <p class="mb-2">* {{$lang}}</p>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -189,7 +193,7 @@
                                     </div>
                                     <div class="col-xl">
                                         <div class="text-muted">
-                                            <p class="mb-2">$3.00 mxn</p>
+                                            <p class="mb-2">${{$profile['overview']['rate_per_hour']}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -209,34 +213,22 @@
                     </div>
                     <div class="card-body">
                         <div>
+                            @foreach($profile['curriculum']['education_degrees'] as $edu)
                             <div class="pb-3">
                                 <div class="row">
                                     <div class="col-xl-4">
                                         <div>
-                                            <h5 class="font-size-15">Administration MBA :</h5>
+                                            <h5 class="font-size-15">____ :</h5>
                                         </div>
                                     </div>
                                     <div class="col-xl">
                                         <div class="text-muted">
-                                            <p class="mb-2">Universidad Anahuac, Mexico</p>
+                                            <p class="mb-2">*****</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="pb-3">
-                                <div class="row">
-                                    <div class="col-xl-4">
-                                        <div>
-                                            <h5 class="font-size-15">Direction AI Business :</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl">
-                                        <div class="text-muted">
-                                            <p class="mb-2">Universidad Iberoamericana, Mexico</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <!-- end card body -->
@@ -248,34 +240,22 @@
                     </div>
                     <div class="card-body">
                         <div>
+                           @foreach($profile['curriculum']['jobs_experience'] as $edu)
                             <div class="pb-3">
                                 <div class="row">
                                     <div class="col-xl-4">
                                         <div>
-                                            <h5 class="font-size-15">Sales senior :</h5>
+                                            <h5 class="font-size-15">____ :</h5>
                                         </div>
                                     </div>
                                     <div class="col-xl">
                                         <div class="text-muted">
-                                            <p class="mb-2">1990-1995 Nike, USA</p>
+                                            <p class="mb-2">*****</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="pb-3">
-                                <div class="row">
-                                    <div class="col-xl-4">
-                                        <div>
-                                            <h5 class="font-size-15">Direction AI Business :</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl">
-                                        <div class="text-muted">
-                                            <p class="mb-2">1990-1995 Nike, USA</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <!-- end card body -->
@@ -299,7 +279,7 @@
                                     </div>
                                     <div class="col-xl">
                                         <div class="text-muted">
-                                            <p class="mb-2">BBVA Bancomer</p>
+                                            <p class="mb-2">{{$profile['payments']['bank']}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -313,7 +293,7 @@
                                     </div>
                                     <div class="col-xl">
                                         <div class="text-muted">
-                                            <p class="mb-2">1234567890111213</p>
+                                            <p class="mb-2">{{$profile['payments']['clabe']}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -327,7 +307,7 @@
                                     </div>
                                     <div class="col-xl">
                                         <div class="text-muted">
-                                            <p class="mb-2">1234554321</p>
+                                            <p class="mb-2">{{$profile['payments']['rfc']}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -349,13 +329,9 @@
                 <h5 class="card-title mb-3">Keywords</h5>
 
                 <div class="d-flex flex-wrap gap-2 font-size-16">
-                    <a href="#" class="badge badge-soft-primary">Photoshop</a>
-                    <a href="#" class="badge badge-soft-primary">illustrator</a>
-                    <a href="#" class="badge badge-soft-primary">HTML</a>
-                    <a href="#" class="badge badge-soft-primary">CSS</a>
-                    <a href="#" class="badge badge-soft-primary">Javascript</a>
-                    <a href="#" class="badge badge-soft-primary">Php</a>
-                    <a href="#" class="badge badge-soft-primary">Python</a>
+                    @foreach($profile['keywords'] as $key)
+                    <a href="#" class="badge badge-soft-primary">{{$key}}</a>
+                    @endforeach
                 </div>
             </div>
             <!-- end card body -->
@@ -369,11 +345,9 @@
                 <div>
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a href="#" class="py-2 d-block text-muted"><i class="mdi mdi-web text-primary me-1"></i>Facebook</a>
-                            <a href="#" class="py-2 d-block text-muted"><i class="mdi mdi-web text-primary me-1"></i>Tik Tok</a>
-                            <a href="#" class="py-2 d-block text-muted"><i class="mdi mdi-web text-primary me-1"></i>Instagram</a>
-                            <a href="#" class="py-2 d-block text-muted"><i class="mdi mdi-web text-primary me-1"></i>Linkedin</a>
-                            <a href="#" class="py-2 d-block text-muted"><i class="mdi mdi-web text-primary me-1"></i>Twitter</a>
+                            @foreach($profile['social_networks'] as $key)
+                            <a href="#" class="py-2 d-block text-muted"><i class="mdi mdi-web text-primary me-1"></i>***</a>
+                            @endforeach
                         </li>
                     </ul>
                 </div>
@@ -427,5 +401,4 @@
 <!-- end row -->
 @endsection
 @push('scripts')
-
 @endpush

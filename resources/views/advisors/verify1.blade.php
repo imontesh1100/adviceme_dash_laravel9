@@ -27,7 +27,7 @@
     <div class="col-xl-9 col-lg-8">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Miguel Martinez Lopez</h5>
+                <h5 class="card-title mb-0">{{$data['infoGralAdvisor']['full_name']}}</h5>
             </div>
             <div class="card-body">
                 <div>
@@ -35,21 +35,21 @@
                         <div class="col-12">
                             <div class="d-flex align-items-start">
                                 <div class="flex-grow-1 overflow-hidden">
-                                    <h5 class="font-size-15 text-truncate">Health:Medicine,Cardiology</h5>
-                                    <p class="font-size-13 text-muted mb-0">05/12/2020</p>
+                                    <h5 class="font-size-15 text-truncate">{{$data['infoGralAdvisor']['name_category']}}:{{$data['infoGralAdvisor']['name_career']}} , {{$data['infoGralAdvisor']['name_expertise']}}</h5>
+                                    <p class="font-size-13 text-muted mb-0">{{$data['infoGralAdvisor']['date_creation']}}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-6">    
                             <div class="position-relative mt-3">
-                                <img src="/assets/images/small/img-3.jpg" alt="" class="img-thumbnail">
+                                <img src="{{$data['infoGralAdvisor']['photo_id']}}" alt="" class="img-thumbnail">
                                 <p>Photo ID</p>
                             </div>
                         </div>
                         <div class="col-xl-6">    
                             <p></p>
                             <div class="position-relative mt-3">
-                                <img src="/assets/images/small/img-3.jpg" alt="" class="img-thumbnail">
+                                <img src="{{$data['infoGralAdvisor']['photo_profile']}}" alt="" class="img-thumbnail">
                                 <p>Photo Profile</p>
                             </div>
                         </div>   
@@ -66,7 +66,10 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title mb-3">Positive verification</h5>
-                <a href="/advisors/users/verify/stage-2/1" class="btn btn-success waves-effect waves-light">Accept</a>
+                <form id="stage1PositiveForm" method="post" action="{{route('advisors.stage1.positive')}}">
+                    <input type="hidden" name="advisorID" value="{{$data['infoGralAdvisor']['id_user_advisor']}}">
+                    <button type="submit" class="btn btn-success waves-effect waves-light">Accept</button>
+                </form>
             </div>
             <!-- end card body -->
         </div>
@@ -77,25 +80,22 @@
                 <h5 class="card-title mb-3">Still pending</h5>
                 <div>
                     <ul class="list-unstyled mb-0">
-                        <li>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="radio" name="formRadios1" id="formRadios1">
-                                <label class="form-check-label" for="formRadios1">
-                                    Request other photo ID
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="radio" name="formRadios2" id="formRadios2">
-                                <label class="form-check-label" for="formRadios2">
-                                    Request other photo profile pic
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#" class="btn btn-soft-primary waves-effect waves-light">SEND</a>
-                        </li>
+                        <form id="stage1StillPendingForm" method="post" action="{{route('advisors.stage1.stillPending')}}">
+                            <input type="hidden" name="advisorID" value="{{$data['infoGralAdvisor']['id_user_advisor']}}">
+                            @foreach($data['stillPendingOptions'] as $opc)
+                            <li>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="radio" name="pendingOption" id="stillPending{{$opc['id_update_profile_request']}}" value="{{$opc['id_update_profile_request']}}" required>
+                                    <label class="form-check-label" for="stillPending{{$opc['id_update_profile_request']}}">
+                                        {{$opc['update_request_profile_name']}}
+                                    </label>
+                                </div>
+                            </li>
+                            @endforeach
+                            <li>
+                                <button type="submit" class="btn btn-soft-primary waves-effect waves-light">SEND</button>
+                            </li>
+                        </form>
                     </ul>
                 </div>
             </div>
@@ -107,26 +107,22 @@
                 <h5 class="card-title mb-3">Disable user</h5>
                 <div>
                     <ul class="list-unstyled mb-0">
-                        <li>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="radio" name="formRadios3" id="formRadios3">
-                                <label class="form-check-label" for="formRadios3">
-                                   Data does not check
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="radio" name="formRadios4" id="formRadios4">
-                                <label class="form-check-label" for="formRadios4">
-                                    Photo seems fake
-                                </label>
-                            </div>
-                        </li>
-                        
-                        <li>
-                            <a href="#" class="btn btn-danger waves-effect waves-light">Disable</a>
-                        </li>
+                        <form id="disableForm" method="post" action="{{route('advisors.stage1.disable')}}">
+                            <input type="hidden" name="advisorID" value="{{$data['infoGralAdvisor']['id_user_advisor']}}">
+                            @foreach($data['disableOptions'] as $opc)
+                            <li>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="radio" name="disableOption" id="disableOption{{$opc['id_disable_reason']}}" required>
+                                    <label class="form-check-label" for="disableOption{{$opc['id_disable_reason']}}">
+                                        {{$opc['disable_reason_name']}}
+                                    </label>
+                                </div>
+                            </li>
+                            @endforeach
+                            <li>
+                                <button type="submit" class="btn btn-danger waves-effect waves-light">Disable</button>
+                            </li>
+                        </form>
                     </ul>
                 </div>
             </div>
@@ -140,5 +136,6 @@
 <!-- end row -->
 @endsection
 @push('scripts')
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{asset('custom/js/advisorsStage1.js')}}"></script>
 @endpush

@@ -4,6 +4,7 @@
 	@include('includes.minia.general.head')
 </head>
 <body>
+@include('includes.minia.loader')
     <div id="layout-wrapper">
         @include('includes.minia.general.header')
     </div>

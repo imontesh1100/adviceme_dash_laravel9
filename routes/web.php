@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdvisorsController;
+use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SalesController;
@@ -37,10 +39,22 @@ Route::middleware([CustomAuth::class])->group(function () {
     Route::get('sales/advisors/without-cfdi',[SalesController::class,'withoutCFDI'])->name('without-cfdi');
     Route::get('sales/advisors/with-cfdi',[SalesController::class,'withCFDI'])->name('with-cfdi');
     Route::get('sales/advisors/payed',[SalesController::class,'payed'])->name('advisors-payed');
-    Route::get('sales/advisor/receipt/{receiptID}',[SalesController::class,'receipt'])->name('advisor-receipt');
+    Route::get('sales/advisor/receipt/{receiptID}',[SalesController::class,'advisorReceipt'])->name('advisor-receipt');
     Route::get('sales/clients',[SalesController::class,'clients'])->name('sales.clients');
     Route::get('sales/client/{clientID}',[SalesController::class,'client'])->name('sales.client');
-
+    Route::get('sales/client/receipt/{receiptID}',[SalesController::class,'clientReceipt'])->name('sales.client.receipt');
+    Route::get('customers/users',[CustomersController::class,'users'])->name('customers.users');
+    Route::get('advisors/users/no-visible',[AdvisorsController::class,'noVisible'])->name('advisors.no_visible');
+    Route::get('advisors/users/pending-visible',[AdvisorsController::class,'pendingVisible'])->name('advisors.pending_visible');
+    Route::get('advisors/users/profile/{advisorID}',[AdvisorsController::class,'profile'])->name('advisors.profile');
+    Route::get('advisors/users/verify/stage-1/{advisorID}',[AdvisorsController::class,'stage1'])->name('advisors.stage1');
+    Route::post('advisors/verify/stage-1/positive',[AdvisorsController::class,'stage1Positive'])->name('advisors.stage1.positive');
+    Route::post('advisors/verify/stage-1/stillPending',[AdvisorsController::class,'stage1StillPending'])->name('advisors.stage1.stillPending');
+    Route::post('advisors/verify/stage-1/disable',[AdvisorsController::class,'stage1Disable'])->name('advisors.stage1.disable');
+    Route::get('advisors/users/verify/stage-2/{advisorID}',[AdvisorsController::class,'stage2'])->name('advisors.stage2');
+    Route::post('advisors/verify/stage-2/positive',[AdvisorsController::class,'stage2Positive'])->name('advisors.stage2.positive');
+    Route::get('advisors/users/visible',[AdvisorsController::class,'visible'])->name('advisors.visible');
+    Route::get('advisors/users/disabled',[AdvisorsController::class,'disabled'])->name('advisors.disabled');
 });
 
 
@@ -72,41 +86,43 @@ Route::get('register', function () {
 // Route::get('sales/client/{id}', function ($id=null) {
 //     return view('sales.client');
 // });
-Route::get('sales/client/receipt/{id}', function ($id=null) {
-    return view('sales.client_receipt');
-});
-Route::get('customers/users', function ($id=null) {
-    return view('customers.users');
-});
+// Route::get('sales/client/receipt/{id}', function ($id=null) {
+//     return view('sales.client_receipt');
+// });
+// Route::get('customers/users', function ($id=null) {
+//     return view('customers.users');
+// });
+// Route::get('advisors/users/no-visible', function ($id=null) {
+//     return view('advisors.users_no_visible');
+// });
+// Route::get('advisors/users/profile/{id}', function ($id=null) {
+//     return view('advisors.profile');
+// });
 Route::get('customers/reports', function ($id=null) {
     //return view('customers.reports');
     return "REPORTS SECTION";
 });
-Route::get('advisors/users/visible', function ($id=null) {
-    return view('advisors.users_visible');
-});
-Route::get('advisors/users/no-visible', function ($id=null) {
-    return view('advisors.users_no_visible');
-});
-Route::get('advisors/users/pending-visible', function ($id=null) {
-    return view('advisors.users_pending_visible');
-});
-Route::get('advisors/users/disabled', function ($id=null) {
-    return view('advisors.users_disabled');
-});
-Route::get('advisors/users/profile/{id}', function ($id=null) {
-    return view('advisors.profile');
-});
+// Route::get('advisors/users/visible', function ($id=null) {
+//     return view('advisors.users_visible');
+// });
+
+// Route::get('advisors/users/pending-visible', function ($id=null) {
+//     return view('advisors.users_pending_visible');
+// });
+// Route::get('advisors/users/disabled', function ($id=null) {
+//     return view('advisors.users_disabled');
+// });
+
 Route::get('advisors/reports', function ($id=null) {
     //return view('customers.reports');
     return "REPORTS SECTION";
 });
-Route::get('advisors/users/verify/stage-1/{id}', function ($id=null) {
-    return view('advisors.verify1');
-});
-Route::get('advisors/users/verify/stage-2/{id}', function ($id=null) {
-    return view('advisors.verify2');
-});
+// Route::get('advisors/users/verify/stage-1/{id}', function ($id=null) {
+//     return view('advisors.verify1');
+// });
+// Route::get('advisors/users/verify/stage-2/{id}', function ($id=null) {
+//     return view('advisors.verify2');
+// });
 // Route::get('advisors/users/certify/{id}', function ($id=null) {
 //     return view('advisors.certify');
 // });

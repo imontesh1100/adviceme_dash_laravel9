@@ -30,9 +30,9 @@
                         </div>
                         <div class="col-6">
                             <p class="float-end font-size-16">
-                                <strong>Status:</strong> <span class="text-success">Accepted</span>
+                                <strong>Status:</strong> <span class="@if($info['header']['status']=='ACCEPTED') text-success @else text-danger @endif">{{$info['header']['status']}}</span>
                                 <span class="cs-spacing">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                <strong>Transaction:</strong> #12345
+                                <strong>Transaction:</strong> #{{$info['header']['id_request']}}
                             </p> 
                         </div>
                     </div>
@@ -45,35 +45,35 @@
                     <div class="col-sm-3">
                         <div>
                             <h5 class="font-size-15 mb-3">Generals</h5>
-                            <p class="mb-1">Date: Feb 20 2022</p>
-                            <p class="mb-1">Schedule: 8:00 to 10:30 pm</p>
-                            <p class="mb-1">Minutes: 45 </p>
-                            <p class="mb-1">Rate per min: $4 mxn </p>
+                            <p class="mb-1">Date: {{$info['general']['date_call']}}</p>
+                            <p class="mb-1">Schedule: {{$info['general']['hour_call']}}</p>
+                            <p class="mb-1">Minutes: {{$info['general']['package']}} </p>
+                            <p class="mb-1">Rate per min: ${{$info['general']['rate_per_minute']}}</p>
 
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div>
                             <h5 class="font-size-15 mb-3">Customer</h5>
-                            <p class="mb-1">Mail: ****@***.com</p>
-                            <p class="mb-1">Username: username</p>
-                            <p class="mb-1">Payment mehtod: ***4334</p>
-                            <p class="mb-1">Status: Connected</p>
+                            <p class="mb-1">Mail: {{$info['customer']['email']}}</p>
+                            <p class="mb-1">Username: {{$info['customer']['username']}}</p>
+                            <p class="mb-1">Payment mehtod: {{$info['customer']['payment_method']}}</p>
+                            <p class="mb-1">Status: @if($info['customer']['joined_call']== '1') Connected @else N/A @endif</p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div>
                             <h5 class="font-size-15 mb-3">Advisor</h5>
-                            <p class="mb-1">Mail: ****@***.com</p>
-                            <p class="mb-1">Name: ******</p>
-                            <p class="mb-1">Category: Health</p>
-                            <p class="mb-1">Status: Connected</p>
+                            <p class="mb-1">Mail: {{$info['advisor']['email']}}</p>
+                            <p class="mb-1">Name: {{$info['advisor']['name']}}</p>
+                            <p class="mb-1">Category: {{$info['advisor']['category']}}</p>
+                            <p class="mb-1">Status: @if($info['advisor']['joined_call']== '1') Connected @else N/A @endif</p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div>
                             <h5 class="font-size-15 mb-3">Interactions</h5>
-                            <p class="mb-1">Customer evaluation: <a href="#">8.0</a></p>
+                            <p class="mb-1">Customer evaluation: <a href="#">{{$info['interactions']['customer_evaluation'] ?? 'N/A'}}</a></p>
                             <p class="mb-1">Reported type: <a href="#">View</a></p>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                                         <h5 class="font-size-15 mb-1">Net income</h5>
                                         <p class="font-size-13 text-muted mb-0">Videocall </p>
                                     </td>
-                                    <td class="text-end">$499.00 mxn</td>
+                                    <td class="text-end">${{$info['ticket']['net_income']}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">01</th>
@@ -107,20 +107,20 @@
                                         <h5 class="font-size-15 mb-1">Adviceme fee</h5>
                                         <p class="font-size-13 text-muted mb-0">15% fee </p>
                                     </td>
-                                    <td class="text-end">$49.00 mxn</td>
+                                    <td class="text-end">${{$info['ticket']['adviceme_fee']}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" colspan="2" class="text-end">Sub Total</th>
-                                    <td class="text-end">$998.00 mxn</td>
+                                    <td class="text-end">${{$info['ticket']['subtotal']}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" colspan="2" class="border-0 text-end">
                                         Tax</th>
-                                    <td class="border-0 text-end">$12.00 mxn</td>
+                                    <td class="border-0 text-end">${{$info['ticket']['tax']}}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" colspan="2" class="border-0 text-end">Total</th>
-                                    <td class="border-0 text-end"><h4 class="m-0">$1010.00 mxn</h4></td>
+                                    <td class="border-0 text-end"><h4 class="m-0">${{$info['ticket']['total']}}</h4></td>
                                 </tr>
                             </tbody>
                         </table>

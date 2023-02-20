@@ -144,7 +144,7 @@ class SalesController extends Controller
             abort(500,Messages::REQUEST_ERROR);
         }
     }
-    public function receipt($receiptID,Request $req){
+    public function advisorReceipt($receiptID,Request $req){
         // Log::channel('custom')->info('Errorrrr test');
         $baseUrl='https://094z0k64j3.execute-api.us-east-2.amazonaws.com/v1/advisor-sales/';
         $page=$req->query('page', 1);
@@ -211,6 +211,25 @@ class SalesController extends Controller
                     'lastPage'=>$response['data']['lastPage'],
                     'info'=>$response['data'],
                 ]);
+            }else{
+                // $req->session()->flush();
+                abort(500,Messages::HOME_ERROR);
+            }
+        }catch(Exception $e){
+            // $req->session()->flush();
+            abort(500,Messages::REQUEST_ERROR);
+        }
+    }
+    public function clientReceipt($receiptID,Request $req){
+        // Log::channel('custom')->info('Errorrrr test');
+        $baseUrl='https://094z0k64j3.execute-api.us-east-2.amazonaws.com/v1/customer-purchases/customer-ticket';
+        try{
+            $response = Http::post($baseUrl,[
+                'session_token' => session('session_token'),
+                'id_request' => $receiptID
+            ]);
+            if($response['status']==='success'){
+                return view('sales.client_receipt',['info'=>$response['data']]);
             }else{
                 // $req->session()->flush();
                 abort(500,Messages::HOME_ERROR);
