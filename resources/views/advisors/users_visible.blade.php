@@ -46,6 +46,7 @@
             </th>
             <th scope="col">#</th>
             <th scope="col">Name</th>
+            <th scope="col">Category</th>
             <th scope="col">Email</th>
             <th scope="col">Stage 1</th>
             <th scope="col">Stage 2</th>
@@ -67,15 +68,16 @@
                         <img src="{{$a['photo_profile']}}" class="rounded-circle" style="width: 32px;"/>
                     </div>
                 </td>
-                <td><strong>{{$a['full_name']}}</strong></td>
+                <td><strong>{{$a['id_user_advisor']}}</strong><br>{{$a['full_name']}}</td>
+                <td>{{$a['name_category']}}</td>
                 <td>{{$a['email']}}</td>
                 <td>
                     @if($a['stage1']=='Not verified')
                         <a class="pending" href="/advisors/users/verify/stage-1/{{$a['id_user_advisor']}}">Not verified</a>
                     @elseif($a['stage1']=='Verified')
-                        <a href="#" class="text-success">{{$a['stage1']}}</a>
+                        <a href="/advisors/users/verify/stage-1/{{$a['id_user_advisor']}}" class="text-success">{{$a['stage1']}}</a>
                     @else
-                        <a href="#">{{$a['stage1']}}</a>
+                        <a href="/advisors/users/verify/stage-1/{{$a['id_user_advisor']}}">{{$a['stage1']}}</a>
                     @endif
                     <br>
                     <span class="text-muted">{{$a['fieldStage1']}}</span>
@@ -84,9 +86,9 @@
                     @if($a['stage2']=='Not verified')
                         <a class="pending" href="/advisors/users/verify/stage-2/{{$a['id_user_advisor']}}">Not verified</a>
                     @elseif($a['stage2']=='Verified')
-                        <a href="#" class="text-success">{{$a['stage2']}}</a>
+                        <a href="/advisors/users/verify/stage-2/{{$a['id_user_advisor']}}" class="text-success">{{$a['stage2']}}</a>
                     @else
-                        <a href="#">{{$a['stage2']}}</a>
+                        <a href="/advisors/users/verify/stage-2/{{$a['id_user_advisor']}}">{{$a['stage2']}}</a>
                     @endif
                     <br>
                     <span class="text-muted">{{$a['fieldStage2']}}</span>
@@ -95,7 +97,9 @@
                 <td>
                     <div class="d-flex gap-3">
                         <!-- <a class="text-success" href="#" data-bs-toggle="modal" data-bs-target="#modal_email"><i class="mdi mdi-pencil font-size-18" id="edittooltip"></i></a> -->
-                        <a class="text-danger" href="#" data-bs-toggle="modal" data-bs-target="#modal_disable_user"><i class="mdi mdi-delete font-size-18" id="deletetooltip"></i></a>
+                        <a class="text-danger" href="javascript:;" onclick="disableAdvisor({{$a['id_user_advisor']}})">
+                            <i class="mdi mdi-delete font-size-18" id="deletetooltip"></i>
+                        </a>
                     </div>
                 </td>
             </tr>
@@ -140,7 +144,9 @@
     <!-- Responsive examples -->
     <script src="/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        var disableURL= @json(route('advisors.stage.disable'));
         $(document).ready(function() {
             //Buttons examples
             var table = $('#datatable-custom').DataTable({
@@ -155,5 +161,37 @@
             //hide msg "Showing * of * records"
             document.getElementById('datatable-custom_info').closest('div.row').remove();
         });
+        function disableAdvisor(advisorID){
+            if (confirm("Are you sure?") != true) return
+            let data = new FormData();
+            data.append("advisorID", advisorID);
+            data.append("disableOption", 4);
+            document.getElementById("loader").style.width = "100%";
+            fetch(disableURL,
+                {
+                    method: 'POST',
+                    headers:{
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+                    body: data
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("loader").style.width = "0%";
+                    if(data.status==true){
+                        Swal.fire(data.msg,'','success').then(()=>{
+                            location.reload();
+                        });
+                    }else{
+                        Swal.fire(data.msg,'','error');
+                    }
+                }).catch(function(error) {
+                    document.getElementById("loader").style.width = "0%";
+                    Swal.fire('Ha ocurrido un error con la petición','','error').then(()=>{
+                        // location.reload();
+                        console.log(error)
+                    });
+            });
+        }
     </script>  
 @endpush

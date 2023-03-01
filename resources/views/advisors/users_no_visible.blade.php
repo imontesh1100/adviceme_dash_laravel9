@@ -47,6 +47,7 @@
             </th>
             <th scope="col">#</th>
             <th scope="col">Name</th>
+            <th scope="col">Category</th>
             <th scope="col">Email</th>
             <th scope="col">Stage 1</th>
             <!-- <th scope="col">Stage 2</th> -->
@@ -68,13 +69,14 @@
                         <img src="{{$a['photo_profile']}}" class="rounded-circle" style="width: 32px;"/>
                     </div>
                 </td>
-                <td><strong>{{$a['full_name']}}</strong></td>
+                <td><strong>{{$a['id_user_advisor']}}</strong><br>{{$a['full_name']}}</td>
+                <td>{{$a['name_category']}}</td>
                 <td>{{$a['email']}}</td>
                 <td>
                     @if($a['stage1']=='Not verified')
                         <a class="pending" href="/advisors/users/verify/stage-1/{{$a['id_user_advisor']}}">Not verified</a>
                     @else
-                        <a href="#">{{$a['stage1']}}</a>
+                        <a href="/advisors/users/verify/stage-1/{{$a['id_user_advisor']}}">{{$a['stage1']}}</a>
                     @endif
                 </td>
                 <!-- <td><a class="pending" href="/advisors/users/certify/id">Not verified</a></td> -->

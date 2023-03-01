@@ -76,18 +76,16 @@
                     @if($a['stage1']=='Not verified')
                         <a class="pending" href="/advisors/users/verify/stage-1/{{$a['id_user_advisor']}}">Not verified</a>
                     @elseif($a['stage1']=='Verified')
-                        <a href="#" class="text-success">{{$a['stage1']}}</a>
+                        <a href="/advisors/users/verify/stage-1/{{$a['id_user_advisor']}}" class="text-success">{{$a['stage1']}}</a>
                     @else
                         <a href="#">{{$a['stage1']}}</a>
                     @endif
-                    <br>
-
                 </td>
                 <td>
                     @if($a['stage2']=='Not verified')
                         <a class="pending" href="/advisors/users/verify/stage-2/{{$a['id_user_advisor']}}">Not verified</a>
                     @elseif($a['stage2']=='Verified')
-                        <a href="#" class="text-success">{{$a['stage2']}}</a>
+                        <a href="/advisors/users/verify/stage-2/{{$a['id_user_advisor']}}" class="text-success">{{$a['stage2']}}</a>
                     @else
                         <a href="#">{{$a['stage2']}}</a>
                     @endif

@@ -182,7 +182,7 @@ class AdvisorsController extends Controller
             abort(500,Messages::REQUEST_ERROR);
         }
     }
-    public function stage1StillPending(Request $req){
+    public function stageStillPending(Request $req){
         // Log::channel('custom')->info('Errorrrr test');
         $baseUrl='https://094z0k64j3.execute-api.us-east-2.amazonaws.com/v1/advisors-status/set-still-pending-options';
         try{
@@ -190,7 +190,7 @@ class AdvisorsController extends Controller
                 'session_token' => session('session_token'),
                 'id_user_advisor' => $req->advisorID,
                 'still_pending_option' => $req->pendingOption,
-                'stage' => 1
+                'stage' => $req->stage
             ]);
             // return $response;
             if($response['status']==='success'){
@@ -204,8 +204,7 @@ class AdvisorsController extends Controller
             abort(500,Messages::REQUEST_ERROR);
         }
     }
-    public function stage1Disable(Request $req){
-        // Log::channel('custom')->info('Errorrrr test');
+    public function stageDisable(Request $req){
         $baseUrl='https://094z0k64j3.execute-api.us-east-2.amazonaws.com/v1/advisors-status/set-disable-options';
         try{
             $response = Http::post($baseUrl,[
@@ -213,16 +212,12 @@ class AdvisorsController extends Controller
                 'id_user_advisor' => $req->advisorID,
                 'disable_option' => $req->disableOption
             ]);
-            // return $response;
             if($response['status']==='success'){
-                return response()->json(['status'=>true,'msg'=>Messages::STAGE1_DISABLED]);
-            }else{
-                // $req->session()->flush();
-                abort(500,Messages::HOME_ERROR);
+                return response()->json(['status'=>true,'msg'=>Messages::ADVISOR_DISABLED]);
             }
+            return response()->json(['status'=>false,'msg'=>Messages::ADVISOR_DISABLED_ERROR]);
         }catch(Exception $e){
-            // $req->session()->flush();
-            abort(500,Messages::REQUEST_ERROR);
+            return response()->json(['status'=>false,'msg'=>Messages::ADVISOR_DISABLED_ERROR]);
         }
     }
     public function stage2($advisorID,Request $req){

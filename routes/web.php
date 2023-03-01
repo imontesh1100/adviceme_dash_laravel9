@@ -49,8 +49,8 @@ Route::middleware([CustomAuth::class])->group(function () {
     Route::get('advisors/users/profile/{advisorID}',[AdvisorsController::class,'profile'])->name('advisors.profile');
     Route::get('advisors/users/verify/stage-1/{advisorID}',[AdvisorsController::class,'stage1'])->name('advisors.stage1');
     Route::post('advisors/verify/stage-1/positive',[AdvisorsController::class,'stage1Positive'])->name('advisors.stage1.positive');
-    Route::post('advisors/verify/stage-1/stillPending',[AdvisorsController::class,'stage1StillPending'])->name('advisors.stage1.stillPending');
-    Route::post('advisors/verify/stage-1/disable',[AdvisorsController::class,'stage1Disable'])->name('advisors.stage1.disable');
+    Route::post('advisors/verify/stage/stillPending',[AdvisorsController::class,'stageStillPending'])->name('advisors.stage.stillPending');
+    Route::post('advisors/verify/stage/disable',[AdvisorsController::class,'stageDisable'])->name('advisors.stage.disable');
     Route::get('advisors/users/verify/stage-2/{advisorID}',[AdvisorsController::class,'stage2'])->name('advisors.stage2');
     Route::post('advisors/verify/stage-2/positive',[AdvisorsController::class,'stage2Positive'])->name('advisors.stage2.positive');
     Route::get('advisors/users/visible',[AdvisorsController::class,'visible'])->name('advisors.visible');

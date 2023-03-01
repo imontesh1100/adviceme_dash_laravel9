@@ -22,7 +22,8 @@
     </div>
 </div>
 <!-- end page title -->
-
+<input type="hidden" value="{{url()->previous()}}" id="prevUrl">
+@if($data['infoGralAdvisor']['status_stage1']!='Verified')
 <div class="row">
     <div class="col-xl-9 col-lg-8">
         <div class="card">
@@ -61,7 +62,6 @@
             <!-- end card body -->
         </div>
     </div>
-    <!-- end col -->
     <div class="col-xl-3 col-lg-4">
         <div class="card">
             <div class="card-body">
@@ -71,17 +71,15 @@
                     <button type="submit" class="btn btn-success waves-effect waves-light">Accept</button>
                 </form>
             </div>
-            <!-- end card body -->
         </div>
-        <!-- end card -->
-
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title mb-3">Still pending</h5>
                 <div>
                     <ul class="list-unstyled mb-0">
-                        <form id="stage1StillPendingForm" method="post" action="{{route('advisors.stage1.stillPending')}}">
+                        <form id="stageStillPendingForm" method="post" action="{{route('advisors.stage.stillPending')}}">
                             <input type="hidden" name="advisorID" value="{{$data['infoGralAdvisor']['id_user_advisor']}}">
+                            <input type="hidden" name="stage" value="1">
                             @foreach($data['stillPendingOptions'] as $opc)
                             <li>
                                 <div class="form-check mb-3">
@@ -101,13 +99,12 @@
             </div>
             <!-- end card body -->
         </div>
-        <!-- end card -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title mb-3">Disable user</h5>
                 <div>
                     <ul class="list-unstyled mb-0">
-                        <form id="disableForm" method="post" action="{{route('advisors.stage1.disable')}}">
+                        <form id="disableForm" method="post" action="{{route('advisors.stage.disable')}}">
                             <input type="hidden" name="advisorID" value="{{$data['infoGralAdvisor']['id_user_advisor']}}">
                             @foreach($data['disableOptions'] as $opc)
                             <li>
@@ -128,12 +125,49 @@
             </div>
             <!-- end card body -->
         </div>
-
-        <!-- end card -->
     </div>
-    <!-- end col -->
 </div>
-<!-- end row -->
+@else
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">{{$data['infoGralAdvisor']['full_name']}}</h5>
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="d-flex align-items-start">
+                                <div class="flex-grow-1 overflow-hidden">
+                                    <h5 class="font-size-15 text-truncate">{{$data['infoGralAdvisor']['name_category']}}:{{$data['infoGralAdvisor']['name_career']}} , {{$data['infoGralAdvisor']['name_expertise']}}</h5>
+                                    <p class="font-size-13 text-muted mb-0">{{$data['infoGralAdvisor']['date_creation']}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">    
+                            <div class="position-relative mt-3">
+                                <img src="{{$data['infoGralAdvisor']['photo_id']}}" alt="" class="img-thumbnail">
+                                <p>Photo ID</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">    
+                            <p></p>
+                            <div class="position-relative mt-3">
+                                <img src="{{$data['infoGralAdvisor']['photo_profile']}}" alt="" class="img-thumbnail">
+                                <p>Photo Profile</p>
+                            </div>
+                        </div>   
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+                </div>
+            </div>
+            <!-- end card body -->
+        </div>
+    </div>
+</div>
+@endif
 @endsection
 @push('scripts')
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
