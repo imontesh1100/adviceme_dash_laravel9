@@ -11,4 +11,6 @@ class Messages{
     const STAGE2_VERIFIED="Stage 2 verified";
     const ADVISOR_DISABLED="Advisor disabled";
     const ADVISOR_DISABLED_ERROR="Something went wrong, try again";
+    const REFERED_EMAIL_SEND="Check your email account";
+    const REFERED_IMAGE_UPLOADED="Profile image uploaded successfully";
 }

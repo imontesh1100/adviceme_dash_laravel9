@@ -1,0 +1,16 @@
+.refered-section{
+    display: none !important;
+}
+.refered-section.active{
+    display: block !important;
+}
+#avatarImg{
+cursor: pointer;
+}
+#profileImage{
+display: none !important;
+}
+.round-img{
+border-radius: 50% !important;
+object-fit: cover !important;
+}

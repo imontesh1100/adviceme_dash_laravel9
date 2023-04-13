@@ -4,6 +4,7 @@ use App\Http\Controllers\AdvisorsController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ReferedController;
 use App\Http\Controllers\SalesController;
 use App\Http\Middleware\Admin\CustomAuth;
 use Illuminate\Http\Request;
@@ -19,13 +20,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('test',function(Request $request){
-    $request->session()->flush();
-    return "Session flushed";
-})->name('test');
+// Route::get('test',function(Request $request){
+//     $request->session()->flush();
+//     return "Session flushed";
+// })->name('test');
 
 Route::prefix('ajax')->group(function () {
     Route::post('login',[LoginController::class,'ajaxLogin'])->name('ajax.login');
+    Route::post('refered/step1',[ReferedController::class,'ajaxStep1'])->name('ajax.refered.step1');
+    Route::post('refered/step2',[ReferedController::class,'ajaxStep2'])->name('ajax.refered.step2');
+    Route::post('refered/step3',[ReferedController::class,'ajaxStep3'])->name('ajax.refered.step3');
+    Route::post('refered/resendCode',[ReferedController::class,'resendCode'])->name('ajax.refered.resendCode');
+    Route::post('refered/profile-image',[ReferedController::class,'profileImg'])->name('ajax.refered.profileImg');
 });
 Route::get('/',function(){
     return redirect(route('login'));
@@ -61,6 +67,9 @@ Route::middleware([CustomAuth::class])->group(function () {
 Route::get('register', function () {
     return view('register');
 });
+Route::get('refered/{parentCode}',[ReferedController::class,'refered'])->name('refered');
+Route::get('test',[ReferedController::class,'ajaxStep1']);
+
 // Route::get('sales/advisors', function () {
 //     return view('sales.advisors');
 // });
