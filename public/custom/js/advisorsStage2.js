@@ -15,7 +15,9 @@ form.addEventListener('submit',function(e){
         .then(data => {
             document.getElementById("loader").style.width = "0%";
             if(data.status==true){
-                Swal.fire(data.msg,'','success');
+                Swal.fire(data.msg,'','success').then(()=>{
+                    location.href=document.getElementById('prevUrl').value;
+                });
             }else{
                 Swal.fire(data.msg,'','error');
             }
