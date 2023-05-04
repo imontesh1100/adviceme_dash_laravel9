@@ -64,13 +64,14 @@
         </div>
         </div><img src="/custom/refered/images/Ad.svg" loading="lazy" width="700" alt="" class="a-account-background-image">
     </div>
-    <div class="a-section-regular-6 refered-section" id="section2">
+    <div class="a-section-regular-6 refered-section active" id="section2">
         <div class="a-account-wrapper">
             <div class="a-margin-bottom-73">
                 <h2 class="a-h3-heading-7 code">Ingresa tu código de verificación</h2>
             </div>
             <div class="a-margin-bottom-70">
-                <p class="a-paragraph-regular-4">Ingresa el código que te llego a este correo: <span class="text-span-6" id="emailPlaceholder">-------</span></p>
+                <p class="a-paragraph-regular-4">Ingresa el código que te llego a este correo: </p>
+                <span class="text-span-6" id="emailPlaceholder">-------</span>
             </div>
             <div class="a-account-form-block w-form">
                 <form id="referedStep2" method="post" class="a-account-form" action="{{route('ajax.refered.step2')}}">

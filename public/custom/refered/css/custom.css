@@ -1,16 +1,27 @@
-.refered-section{
-    display: none !important;
-}
-.refered-section.active{
-    display: block !important;
-}
 #avatarImg{
 cursor: pointer;
 }
-#profileImage{
+#profileImage,#idPhoto,#shortVideo{
 display: none !important;
 }
 .round-img{
 border-radius: 50% !important;
 object-fit: cover !important;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.a-button-primary-6.disabled{
+    background-color: #cdcdcd !important;
+}
+.a-button-primary-6.disabled:hover{
+    background-color: #cdcdcd !important;
 }

@@ -140,6 +140,7 @@
                         <th>Total sales</th>
                         <th>Personal profit</th>
                         <th>Net income</th>
+                        <th>Total commissions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -151,6 +152,8 @@
                         <td><a href="/sales/advisor/{{$el['id_user_consultant']}}">${{$el['total_sales'] ?? '--'}}</a></td>
                         <td>${{$el['app_profit'] ?? ''}}</td>
                         <td>${{$el['advisor_income'] ?? ''}}</td>
+                        <td><a href="/sales/advisor/{{$el['id_user_consultant']}}/commissions">${{$el['commissions'] ?? '--'}}</a></td>
+
                     </tr>
                     @endforeach
                     </tbody>

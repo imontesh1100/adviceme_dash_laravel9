@@ -28,15 +28,15 @@
             <div class="card-body">
                 <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
                     <thead>
-                    <tr>
+                     <tr>
                         <th>Advisor</th>
                         <th>Client</th>
-                        <th>ID request</th>
-                        <th>Date</th>
-                        <th>Schedule</th>
                         <th>Package</th>
                         <th>Sale price</th>
                         <th>App Profit</th>
+                        <th>Commission</th>
+                        <th>Schedule</th>
+                        <th>Date</th>
                         <th>More info</th>
                     </tr>
                     </thead>
@@ -45,12 +45,12 @@
                     <tr>
                         <td>{{$el['advisor_name']}}</td>
                         <td>{{$el['customer_user_name']}}</td>
-                        <td>{{$el['id_request']}}</td>
-                        <td>{{$el['date_call']}}</td>
-                        <td>{{$el['schedule']}}</td>
                         <td>{{$el['package']}}</td>
                         <td>${{$el['sale_price']}}</td>
                         <td>${{$el['app_profit']}}</td>
+                        <td>${{$el['commission']}}</td>
+                        <td>{{$el['schedule']}}</td>
+                        <td>{{$el['date_call']}}</td>
                         <td><a href="/sales/advisor/receipt/{{$el['id_request']}}">View</a></td>
                     </tr>
                     @endforeach

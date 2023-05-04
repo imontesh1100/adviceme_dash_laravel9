@@ -31,7 +31,9 @@
                         <div class="col-6">
                             <p class="float-end font-size-16">
                                 <strong>Status:</strong> 
-                                <span class="text-success">{{$info['header']['status']}}</span>
+                                <span class="{{strtolower($info['header']['status'])}}">
+                                    {{ucfirst(strtolower($info['header']['status']))}}
+                                </span>
                                 <span class="cs-spacing">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                 <strong>Transaction:</strong> #{{$info['header']['id_request']}}
                             </p> 
@@ -166,7 +168,11 @@
                 <div class="d-print-none mt-3">
                     <div class="float-end">
                         <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light me-1"><i class="fa fa-print"></i></a>
-                        <a href="#" class="btn btn-primary w-md waves-effect waves-light blue-cs-bg">Pay</a>
+                        @if($info['header']['status']=='TRANSFERED' || $info['header']['status']=='REFUNDED')
+                            <a href="javascript:;" class="btn btn-secondary w-md waves-effect waves-light disabled">Payed</a>
+                        @else
+                            <a href="javascript:;" class="btn btn-primary w-md waves-effect waves-light blue-cs-bg" onclick="updateReceiptStatus({{$info['header']['id_request']}})">Pay</a>
+                        @endif 
                     </div>
                 </div>
             </div>
@@ -188,5 +194,8 @@
     <script src="/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
-    <script src="/assets/js/pages/datatables.init.js"></script>    
+    <!-- <script src="/assets/js/pages/datatables.init.js"></script>  -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
+    <script src="{{asset('custom/js/updateAdvisorReceipt.js')}}"></script>  
+
 @endpush

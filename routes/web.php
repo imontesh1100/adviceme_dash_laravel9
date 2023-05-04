@@ -27,11 +27,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('ajax')->group(function () {
     Route::post('login',[LoginController::class,'ajaxLogin'])->name('ajax.login');
-    Route::post('refered/step1',[ReferedController::class,'ajaxStep1'])->name('ajax.refered.step1');
-    Route::post('refered/step2',[ReferedController::class,'ajaxStep2'])->name('ajax.refered.step2');
-    Route::post('refered/step3',[ReferedController::class,'ajaxStep3'])->name('ajax.refered.step3');
+    Route::post('refered/verification-code',[ReferedController::class,'ajaxVerification'])->name('ajax.refered.verification');
     Route::post('refered/resendCode',[ReferedController::class,'resendCode'])->name('ajax.refered.resendCode');
-    Route::post('refered/profile-image',[ReferedController::class,'profileImg'])->name('ajax.refered.profileImg');
+    Route::post('refered/profile-image',[ReferedController::class,'ajaxProfileImg'])->name('ajax.refered.profileImg');
+    Route::post('refered/id-photo',[ReferedController::class,'ajaxIDPhoto'])->name('ajax.refered.id_photo');
+    Route::post('refered/get-careers',[ReferedController::class,'ajaxGetCareers'])->name('ajax.refered.get_careers');
+    Route::post('refered/get-expertises',[ReferedController::class,'ajaxGetExpertises'])->name('ajax.refered.get_expertises');
+    Route::post('refered/documentation',[ReferedController::class,'ajaxDocumentation'])->name('ajax.refered.documentation');
+    Route::post('refered/bio',[ReferedController::class,'ajaxBio'])->name('ajax.refered.bio');
+    Route::post('refered/professional-id',[ReferedController::class,'ajaxProfessionalID'])->name('ajax.refered.professional_id');
+    Route::post('refered/get-addresses',[ReferedController::class,'ajaxGetAddresses'])->name('ajax.refered.get_addresses');
+    Route::post('refered/update-address',[ReferedController::class,'ajaxUpdateAddress'])->name('ajax.refered.update_address');
+    Route::post('refered/update-video-url',[ReferedController::class,'ajaxVideoUrl'])->name('ajax.refered.sendUrl');
 });
 Route::get('/',function(){
     return redirect(route('login'));
@@ -42,11 +49,14 @@ Route::middleware([CustomAuth::class])->group(function () {
     Route::get('home',[HomeController::class,'home'])->name('home');
     Route::get('sales/advisors',[SalesController::class,'advisors'])->name('sales.advisors');
     Route::get('sales/advisor/{advisorID}',[SalesController::class,'advisorSales'])->name('sales.advisor');
+    Route::get('sales/advisor/{advisorID}/commissions',[SalesController::class,'advisorSalesCommisions'])->name('sales.advisor.commissions');
     Route::get('sales/advisors/without-cfdi',[SalesController::class,'withoutCFDI'])->name('without-cfdi');
     Route::get('sales/advisors/with-cfdi',[SalesController::class,'withCFDI'])->name('with-cfdi');
     Route::get('sales/advisors/payed',[SalesController::class,'payed'])->name('advisors-payed');
     Route::get('sales/advisor/receipt/{receiptID}',[SalesController::class,'advisorReceipt'])->name('advisor-receipt');
+    Route::post('sales/advisor/updateCommissionStatus',[SalesController::class,'updateCommissionStatus'])->name('commission.update.status');
     Route::get('sales/clients',[SalesController::class,'clients'])->name('sales.clients');
+    Route::post('sales/client/updateReceiptStatus',[SalesController::class,'updateReceiptStatus'])->name('receipt.update.status');
     Route::get('sales/client/{clientID}',[SalesController::class,'client'])->name('sales.client');
     Route::get('sales/client/receipt/{receiptID}',[SalesController::class,'clientReceipt'])->name('sales.client.receipt');
     Route::get('customers/users',[CustomersController::class,'users'])->name('customers.users');
@@ -67,12 +77,25 @@ Route::middleware([CustomAuth::class])->group(function () {
 Route::get('register', function () {
     return view('register');
 });
-Route::get('refered/{parentCode}',[ReferedController::class,'refered'])->name('refered');
-Route::get('test',[ReferedController::class,'ajaxStep1']);
+Route::post('refered/register/confirm',[ReferedController::class,'confirm'])->name('refered.confirm');
+Route::get('refered/{parentCode}',[ReferedController::class,'index'])->name('refered.index');
+Route::post('refered/{parentCode}/verification-code',[ReferedController::class,'verification'])->name('refered.verification');
+Route::get('refered/personal-data/{sessionToken}',[ReferedController::class,'personalData'])->name('refered.personal_data');
+Route::post('refered/personal-data',[ReferedController::class,'updatePersonalData'])->name('refered.update.personal_data');
+Route::get('refered/documentation/{sessionToken}',[ReferedController::class,'documentation'])->name('refered.documentation');
+Route::get('refered/bio/{sessionToken}',[ReferedController::class,'bio'])->name('refered.bio');
+Route::get('refered/profesional-id/{sessionToken}',[ReferedController::class,'professionalID'])->name('refered.professional_id');
+Route::get('refered/address/{sessionToken}',[ReferedController::class,'address'])->name('refered.address');
+Route::get('refered/health/{sessionToken}',[ReferedController::class,'health'])->name('refered.health');
+Route::get('refered/video/{sessionToken}',[ReferedController::class,'video'])->name('refered.video');
 
-// Route::get('sales/advisors', function () {
-//     return view('sales.advisors');
-// });
+
+
+
+
+Route::get('test', function () {
+    return view('test');
+});
 // Route::get('sales/advisor/{id}', function ($id=null) {
 //     return view('sales.advisor');
 // });

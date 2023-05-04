@@ -1,10 +1,9 @@
-let profileImgForm = document.getElementById('profileImgForm')
-
-document.getElementById("profileImage").onchange = function() {
-    let data = new FormData(profileImgForm);
-    data.append('token',document.getElementById('token').value)
+let verificationForm = document.getElementById('verificationForm')
+verificationForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    let data = new FormData(verificationForm);
     document.getElementById("loader").style.width = "100%";
-    fetch(profileImgForm.action,
+    fetch(verificationForm.action,
     {
         method: 'POST',
         headers:{
@@ -16,14 +15,12 @@ document.getElementById("profileImage").onchange = function() {
     .then(data => {
         document.getElementById("loader").style.width = "0%";
         if(data.status==true){
-            Swal.fire(data.msg,'','success').then(()=>{
-                document.getElementById('avatarImg').src=data.imageUrl+'?'+ new Date().getTime()
-            })
+            location.href=data.url
         }else{
             Swal.fire(data.msg,'','error');
         }
     }).catch(function(error) {
         document.getElementById("loader").style.width = "0%";
-        Swal.fire('Something went wrong :(','','error')
+        Swal.fire('Something wrong validating your code, try again later','','error')
     });
-};
+});

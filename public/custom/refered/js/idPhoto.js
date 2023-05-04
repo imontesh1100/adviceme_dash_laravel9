@@ -1,10 +1,10 @@
-let profileImgForm = document.getElementById('profileImgForm')
+let idPhotoForm = document.getElementById('idPhotoForm')
 
-document.getElementById("profileImage").onchange = function() {
-    let data = new FormData(profileImgForm);
+document.getElementById("idPhoto").onchange = function() {
+    let data = new FormData(idPhotoForm);
     data.append('token',document.getElementById('token').value)
     document.getElementById("loader").style.width = "100%";
-    fetch(profileImgForm.action,
+    fetch(idPhotoForm.action,
     {
         method: 'POST',
         headers:{
@@ -17,7 +17,7 @@ document.getElementById("profileImage").onchange = function() {
         document.getElementById("loader").style.width = "0%";
         if(data.status==true){
             Swal.fire(data.msg,'','success').then(()=>{
-                document.getElementById('avatarImg').src=data.imageUrl+'?'+ new Date().getTime()
+                document.getElementById('idImage').src=data.imageUrl+'?'+ new Date().getTime()
             })
         }else{
             Swal.fire(data.msg,'','error');

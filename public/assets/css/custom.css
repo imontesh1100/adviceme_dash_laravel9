@@ -6,8 +6,11 @@
 .pending{
     color: #f8d53a;
 }
-.verified{
-    color: #20bf00;
+.refunded{
+    color: #fd625e!important;
+}
+.verified,.transfered{
+    color: #20bf00 !important;
 }
 .none{
     color: #a5a5a5;
