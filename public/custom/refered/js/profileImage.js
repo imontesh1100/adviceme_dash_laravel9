@@ -1,5 +1,5 @@
 let profileImgForm = document.getElementById('profileImgForm')
-
+let btnPersonal=document.getElementById('btnPersonal')
 document.getElementById("profileImage").onchange = function() {
     let data = new FormData(profileImgForm);
     data.append('token',document.getElementById('token').value)
@@ -16,8 +16,10 @@ document.getElementById("profileImage").onchange = function() {
     .then(data => {
         document.getElementById("loader").style.width = "0%";
         if(data.status==true){
+            document.getElementById('avatarImg').src=data.imageUrl+'?'+ new Date().getTime()
             Swal.fire(data.msg,'','success').then(()=>{
-                document.getElementById('avatarImg').src=data.imageUrl+'?'+ new Date().getTime()
+                btnPersonal.classList.remove('disabled')
+                btnPersonal.removeAttribute('disabled')
             })
         }else{
             Swal.fire(data.msg,'','error');

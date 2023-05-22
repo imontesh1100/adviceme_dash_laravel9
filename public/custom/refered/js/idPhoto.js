@@ -1,4 +1,5 @@
 let idPhotoForm = document.getElementById('idPhotoForm')
+let btnDocumentation=document.getElementById('btnDocumentation')
 
 document.getElementById("idPhoto").onchange = function() {
     let data = new FormData(idPhotoForm);
@@ -16,6 +17,8 @@ document.getElementById("idPhoto").onchange = function() {
     .then(data => {
         document.getElementById("loader").style.width = "0%";
         if(data.status==true){
+            btnDocumentation.classList.remove('disabled')
+            btnDocumentation.removeAttribute('disabled')
             Swal.fire(data.msg,'','success').then(()=>{
                 document.getElementById('idImage').src=data.imageUrl+'?'+ new Date().getTime()
             })

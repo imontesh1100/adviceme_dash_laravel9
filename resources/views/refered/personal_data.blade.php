@@ -49,7 +49,7 @@
     <div class="a-account-container-regular">
         <div class="a-title-wrap-center-2">
             <div class="container-5 w-container">
-                <img src="{{$personalInfo['photo_profile'] ?? '/custom/refered/images/user.svg'}}" loading="lazy" width="80" height="80" id="avatarImg" class="round-img"  onclick="document.getElementById('profileImage').click()">
+                <img src="{{'/custom/refered/images/user.svg'}}" loading="lazy" width="80" height="80" id="avatarImg" class="round-img"  onclick="document.getElementById('profileImage').click()">
             </div>
             <p class="a-paragraph-regular-6">Sube tu foto de perfil</p>
             <form id="profileImgForm" method="post" action="{{route('ajax.refered.profileImg')}}">
@@ -107,7 +107,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="a-account-button-wrapper"><input type="submit" value="Continuar" class="a-button-primary-6 w-button"></div>
+                <div class="a-account-button-wrapper"><input id="btnPersonal" type="submit" value="Continuar" class="a-button-primary-6 disabled w-button" disabled></div>
                 <div class="back">
                     <div class="a-paragraph-small-7">Por seguridad estos campos son obligatorios en esta categoría.</div>
                 </div>

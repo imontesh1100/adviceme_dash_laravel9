@@ -47,7 +47,7 @@
     <div class="a-account-container-regular">
         <div class="a-title-wrap-center-2">
             <div class="container-5 w-container"><img id="idImage" src="/custom/refered/images/id.svg" loading="lazy" width="320" height="300" alt="" class="image-9" onclick="document.getElementById('idPhoto').click()"></div>
-            <p class="a-paragraph-regular-6 mt-5">Da<a href="javascript:;" class="text-span-8" onclick="document.getElementById('idPhoto').click()"> click aquí </a>para subir una foto de tu INE o pasaporte.</p>
+            <p class="a-paragraph-regular-6 mt-5">Da<a href="javascript:;" class="text-span-8" onclick="document.getElementById('idPhoto').click()"> click aquí </a>para subir una foto de tu INE o pasaporte.</p>
             <form id="idPhotoForm" method="post" action="{{route('ajax.refered.id_photo')}}">
                 <input type="file" name="idPhoto" id="idPhoto" accept="image/png, image/jpeg">
             </form>
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="a-account-button-wrapper">
-                    <input type="submit" value="Continuar" class="a-button-primary-6 w-button">
+                    <input id="btnDocumentation" type="submit" value="Continuar" class="a-button-primary-6 disabled w-button" disabled>
                 </div>
             </form>
         </div>
